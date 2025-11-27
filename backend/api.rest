@@ -1,0 +1,18 @@
+POST http://10.55.128.200:8000/formularios
+Content-Type: application/json
+
+{
+    "nombres_apellidos": "Carlos Rodríguez",
+    "cedula_ciudadania": "12345678",
+    "sexo": "M",
+    "fecha_nacimiento": "1950-05-20",
+    "edad": 73,
+    "eps_afiliacion": "SURA",
+    "lugar_nacimiento": "Medellín",
+    "direccion_residencia": "Carrera 80 #25-15",
+    "contacto_celular": "3101234567",
+    "victima_conflicto": "NO",
+    "sisben": "Nivel 1",
+    "discapacidad": "NO",
+    "tipo_discapacidad": ""
+}
