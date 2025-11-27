@@ -1,20 +1,29 @@
-FROM denoland/deno:alpine
+# ==========================
+# 1️⃣ BUILD FRONTEND
+# ==========================
+FROM node:18-alpine AS frontend-builder
 
-# Instalar Node.js para construir el frontend
-RUN apk add --no-cache nodejs npm
+WORKDIR /app/frontend
+
+COPY frontend/package*.json ./
+RUN npm install
+
+COPY frontend .
+RUN npm run build
+
+
+# ==========================
+# 2️⃣ DENO SERVER
+# ==========================
+FROM denoland/deno:alpine
 
 WORKDIR /app
 
-# Copiar todo el proyecto
-COPY . .
+# copiar backend
+COPY backend .
 
-# Construir frontend
-WORKDIR /app/frontend
-RUN npm install
-RUN npm run build
-
-# Volver al backend
-WORKDIR /app/backend
+# copiar frontend compilado
+COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
 EXPOSE 8000
 
